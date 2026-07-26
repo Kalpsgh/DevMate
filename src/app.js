@@ -2,12 +2,8 @@ import express from "express"
 
 const app=express();
 
-app.get("/",(req,res)=>{
-    res.send("Dashboard");
-})
-
-app.get("/home",(req,res)=>{
-    res.send("Home");
+app.get("/user",(req,res)=>{
+    console.log(req.query);
 })
 
 app.get("/about",(req,res)=>{
