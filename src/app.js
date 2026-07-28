@@ -1,13 +1,19 @@
 import express from "express"
+import adminAuth from "./middlewares/auth.js"
 
 const app=express();
 
-app.get("/user",(req,res)=>{
-    console.log(req.query);
+
+app.use("/admin",adminAuth)
+
+app.get("/admin/getAllData",(req,res)=>{
+    res.send("All data sent")
+    console.log("All data sent");
 })
 
-app.get("/about",(req,res)=>{
-    res.send("About");
+app.get("/admin/deleteUser",(req,res)=>{
+    res.send("User Deleted");
+    console.log("User Deleted");
 })
 
 app.listen(5000,()=>{
