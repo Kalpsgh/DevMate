@@ -10,4 +10,16 @@ const adminAuth=(req,res,next)=>{
     }
 }
 
-export default adminAuth;
+const userAuth=(req,res,next)=>{
+    console.log("User auth is checking....");
+    const token="xyz";
+    const isAdminAuthorized=token==="xyz";
+    if(!isAdminAuthorized){
+        return res.status(401).send("Unauthorized request");
+    }
+    else{
+        next();
+    }
+}
+
+export {adminAuth,userAuth};
