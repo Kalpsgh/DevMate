@@ -1,9 +1,15 @@
 import mongoose, { model, Schema } from "mongoose";
 
 const userSchema=Schema({
-    firstName:String,
+    firstName:{
+        type:String,
+        required:true   
+    },
     lastName:String,
-    emailId:String,
+    emailId:{
+        type: String,
+        required: [true, "Email is required"]
+    },
     password:String
 })
 
