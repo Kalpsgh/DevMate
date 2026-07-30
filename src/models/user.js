@@ -1,18 +1,10 @@
 import mongoose, { model, Schema } from "mongoose";
 
 const userSchema=Schema({
-    firstName:{
-        type:String,
-    },
-    lastName:{
-        type:String,
-    },
-    emailId:{
-        type:String,
-    },
-    password:{
-        type:String,
-    },
+    firstName:String,
+    lastName:String,
+    emailId:String,
+    password:String
 })
 
 const UserModel=model("User",userSchema);
