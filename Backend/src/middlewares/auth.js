@@ -21,6 +21,7 @@ const userAuth = async (req, res, next) => {
         }
 
         req.user = user;     // ⭐ Store user
+        console.log("User Auth is checking....")
 
         next();
 

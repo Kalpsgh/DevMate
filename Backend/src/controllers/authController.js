@@ -6,24 +6,22 @@ import {
   validateLogInData,
 } from "../utils/validation.js";
 
+
 export const signup = async (req, res) => {
   try {
     // Validate
     validateSignUpData(req);
 
-    const { firstName, lastName, emailId, password } = req.body;
+    const { firstName, lastName, emailId, password,age, gender, photoUrl,about, skills, } = req.body;
 
     // Hash password
     const hashPassword = await bcrypt.hash(password, 10);
 
     // Create user
     const user = new User({
-      firstName,
-      lastName,
-      emailId,
+      ...req.body,
       password: hashPassword,
     });
-
     await user.save();
 
     res.send("Data Send Successfully");
@@ -68,3 +66,17 @@ export const login = async (req, res) => {
     res.send(err.message);
   }
 };
+
+export const logout = (req, res) => {
+  try {
+
+    const { token } = req.cookies;
+    res.clearCookie("token");
+
+    res.send("Logout Successful")
+
+  }
+  catch (err) {
+    res.send(err.message);
+  }
+}
