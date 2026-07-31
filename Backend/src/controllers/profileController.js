@@ -1,4 +1,5 @@
-import {validateEditProfileData} from "../utils/validation.js"
+import { validateEditProfileData } from "../utils/validation.js"
+import bcrypt from "bcrypt";
 
 export const getProfile = async (req, res) => {
     try {
@@ -11,25 +12,53 @@ export const getProfile = async (req, res) => {
     }
 };
 
-export const editProfile=async(req,res)=>{
+export const editProfile = async (req, res) => {
 
     try {
-    validateEditProfileData(req);
+        validateEditProfileData(req);
 
-    const loggedInUser = req.user;
-    console.log(loggedInUser)
+        const loggedInUser = req.user;
+        console.log(loggedInUser)
 
-    Object.keys(req.body).forEach((key) => {
-        loggedInUser[key] = req.body[key];
-    });
+        Object.keys(req.body).forEach((key) => {
+            loggedInUser[key] = req.body[key];
+        });
 
-    console.log(loggedInUser)
+        console.log(loggedInUser)
 
-    await loggedInUser.save();
+        await loggedInUser.save();
 
-    res.send("Profile Updated Successfully");
+        res.send("Profile Updated Successfully");
 
-} catch (err) {
-    res.status(500).send(err.message);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 }
+
+export const passwordupdate = async (req, res) => {
+
+    try{
+    const { oldPassword, newPassword } = req.body;
+
+    const isOldPasswordValid = await bcrypt.compare(
+        oldPassword,
+        req.user.password
+    );
+
+    if (!isOldPasswordValid) {
+        return res.send("Invalid Credentials")
+    }
+
+    const hashNewPassword = await bcrypt.hash(newPassword, 10);
+
+    req.user.password = hashNewPassword;
+
+    await req.user.save();
+    res.send("Password Updated Successfully")
+}
+
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+
 }

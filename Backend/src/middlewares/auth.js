@@ -20,8 +20,8 @@ const userAuth = async (req, res, next) => {
             return res.status(401).send("Invalid Credentials");
         }
 
-        req.user = user;     // ⭐ Store user
-        console.log("User Auth is checking....")
+        req.user = user;   
+       
 
         next();
 
