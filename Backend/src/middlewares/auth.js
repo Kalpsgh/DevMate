@@ -4,6 +4,7 @@ import UserModel from "../models/user.js"
 const userAuth = async (req, res, next) => {
 
     try {
+        
 
         const { token } = req.cookies;
 
