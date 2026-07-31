@@ -1,0 +1,70 @@
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import User from "../models/user.js";
+import {
+  validateSignUpData,
+  validateLogInData,
+} from "../utils/validation.js";
+
+export const signup = async (req, res) => {
+  try {
+    // Validate
+    validateSignUpData(req);
+
+    const { firstName, lastName, emailId, password } = req.body;
+
+    // Hash password
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    // Create user
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password: hashPassword,
+    });
+
+    await user.save();
+
+    res.send("Data Send Successfully");
+
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+
+    validateLogInData(req);
+
+    const { emailId, password } = req.body;
+
+    const user = await User.findOne({ emailId });
+
+    if (!user) {
+      throw new Error("Invalid Credentials");
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (!isPasswordValid) {
+      throw new Error("Invalid Credentials");
+    }
+
+    const token = jwt.sign(
+      { _id: user._id },
+      "MySecretKey"
+    );
+
+    res.cookie("token", token);
+
+    res.send("Login Successful");
+
+  } catch (err) {
+    res.send(err.message);
+  }
+};
