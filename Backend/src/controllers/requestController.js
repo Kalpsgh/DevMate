@@ -6,6 +6,7 @@ export const requestController = async (req, res) => {
 
     try {
 
+        ///request/send/:status/:touserId
         const fromUserId = req.user._id;
         const toUserId = req.params.touserId;
         const status = req.params.status;
@@ -52,7 +53,7 @@ export const requestController = async (req, res) => {
         if (existingRequest) {
             return res.status(400).send("Connection Request Already Exists");
         }
-        
+
         const connectionRequest = new ConnectionRequest({
             fromUserId,
             toUserId,
@@ -76,4 +77,48 @@ export const requestController = async (req, res) => {
 
 
 
+}
+
+//request/review/:status/:requestId
+export const requestReview = async (req, res) => {
+
+    try {
+
+        const { status, requestId } = req.params;
+
+        // Validate status
+        const allowedStatus = ["accepted", "rejected"];
+
+        if (!allowedStatus.includes(status)) {
+            return res.status(400).send("Invalid Status");
+        }
+
+        // Validate ObjectId
+        if (!mongoose.Types.ObjectId.isValid(requestId)) {
+            return res.status(400).send("Invalid User ID");
+        }
+
+        // Check user exists
+        const connectionRequest = await ConnectionRequest.findOne({
+           _id: requestId,
+           toUserId: req.user._id,
+           status: "interested"
+
+        });
+
+        if (!connectionRequest) {
+           return res.status(404).send("Connection Request Not Found");
+        }
+
+        connectionRequest.status=status;
+
+        await connectionRequest.save();
+
+        res.send("Request Accepted")
+
+
+
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 }
