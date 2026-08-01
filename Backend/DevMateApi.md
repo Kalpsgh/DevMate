@@ -127,3 +127,52 @@ DevMate APIs
 8. Save document.
 
 9. Send response.
+
+# User Router
+
+## GET /user/request/received
+1. Get logged-in user from req.user._id.
+
+2. Find ConnectionRequests where:
+   - toUserId = logged-in user
+   - status = "interested"
+
+3. Populate fromUserId.
+
+4. Send response.
+
+
+## GET /user/connections
+1. Get logged-in user from req.user._id.
+
+2. Find ConnectionRequests where:
+   - status = "accepted"
+   - logged-in user is sender or receiver.
+
+3. Populate fromUserId and toUserId.
+
+4. Map and return the other user's profile.
+
+5. Send response.
+
+
+## GET /feed
+1. Get logged-in user from req.user._id.
+
+2. Get page and limit from query.
+
+3. Calculate skip.
+
+4. Find all ConnectionRequests where logged-in user is sender or receiver.
+
+5. Store fromUserId and toUserId in a Set.
+
+6. Find Users where:
+   - _id is NOT IN Set.
+   - _id is NOT logged-in user.
+
+7. Select required fields.
+
+8. Apply skip and limit.
+
+9. Send response.

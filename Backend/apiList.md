@@ -1,23 +1,22 @@
-# DevTinder APIs
+# DevMate APIs
 
-## authRouter
-- POST /signup
-- POST /login
-- POST /logout
+Auth Router
+✅ POST /signup
+✅ POST /login
+✅ POST /logout
 
-## profileRouter
-- GET /profile/view
-- PATCH /profile/edit
-- PATCH /profile/password // Forgot password API
+Profile Router
+✅ GET /profile/view
+✅ PATCH /profile/edit
+✅ PATCH /profile/password
 
-## connectionRequestRouter
-- POST /request/send/:status/:userId 
-- POST /request/review/:status/:requestId
+Connection Request Router
+✅ POST /request/send/:status/:userId
+✅ POST /request/review/:status/:requestId
 
-## userRouter
-- GET /user/requests/received
-- GET /user/connections
-- GET /user/feed - Gets you the profiles of other users on platform
-
+User Router
+✅ GET /user/request/received
+✅ GET /user/connections
+✅ GET /feed
 
 Status: ignored, interested, accepeted, rejected
