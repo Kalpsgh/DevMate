@@ -60,7 +60,7 @@ export const login = async (req, res) => {
 
     res.cookie("token", token);
 
-    res.send("Login Successful");
+    res.send(user);
 
   } catch (err) {
     res.send(err.message);
