@@ -1,18 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import { Routes, Route } from "react-router-dom";
+import Profile from "./pages/Profile";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    
-    DevMate
+
+      <Routes>
+
+        {/* Pages with Navbar */}
+        <Route path="/" element={<Home />}>
+          
+          <Route path="profile" element={<Profile />} />
+          
+        </Route>
+
+        {/* Pages without Navbar */}
+        <Route path="/login" element={<Login />} />
+
+        {/* 404 */}
+        <Route path="*" element={<Error />} />
+
+      </Routes>
+
+
+
     </>
-  )
+  );
 }
 
-export default App
+export default App;
