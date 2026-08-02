@@ -2,6 +2,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
+import Feed from "./pages/Feed";
+import Hero from "./pages/Hero";
 
 function App() {
   return (
@@ -11,8 +13,10 @@ function App() {
 
         {/* Pages with Navbar */}
         <Route path="/" element={<Home />}>
+           <Route index element={<Hero />} />
           
-          <Route path="profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/feed" element={<Feed />} />
           
         </Route>
 
