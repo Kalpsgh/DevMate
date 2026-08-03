@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import Hero from "./pages/Hero";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
 
         {/* Pages without Navbar */}
         <Route path="/login" element={<Login />} />
+
+        <Route path="/signup" element={<Signup/>}/>
 
         {/* 404 */}
         <Route path="*" element={<Error />} />
