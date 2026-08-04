@@ -1,12 +1,13 @@
 import React from 'react'
+import { FaTimes, FaHeart } from "react-icons/fa";
 
 const UserCard = ({ user }) => {
     return (
-        <div className="flex justify-center items-center py-3 mt-2">
+        <div className="flex justify-center items-center py-3 mt-3">
 
-            <div className="card w-80  bg-base-300 shadow-2xl border border-base-300 ">
+            <div className="card w-80 bg-base-300 shadow-2xl border border-base-300 gap-2">
 
-                <figure className="pt-5 flex justify-center">
+                <figure className="pt-5 flex justify-center mt-2">
 
                     <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-primary shadow-lg">
 
@@ -47,13 +48,13 @@ const UserCard = ({ user }) => {
 
                     </div>
 
-                    <div className="card-actions justify-center w-full mt-5 gap-3">
+                    <div className="card-actions justify-center w-full my-4 gap-3 m">
 
-                        <button className="btn btn-success flex-1 rounded-full">
+                        <button   className="btn btn-primary rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg">
                             Interested <FaHeart />
                         </button>
 
-                        <button className="btn btn-error flex-1 rounded-full">
+                        <button  className="btn btn-error rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg">
                             Ignore <FaTimes />
                         </button>
 

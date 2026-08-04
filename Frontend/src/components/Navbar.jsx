@@ -10,6 +10,7 @@ import { removeUser } from "../utils/userSlice";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 
+
 const Navbar = () => {
 
   const user = useSelector((store) => store.user);
@@ -51,13 +52,15 @@ const Navbar = () => {
               alt="DevMate"
               className="w-11 h-11 object-contain cursor-pointer"
             />
-
+            
+            <Link to={user ? "/feed" : "/"}>
             <h1 className="text-3xl font-bold cursor-pointer">
               <span className="text-white">Dev</span>
               <span className="bg-gradient-to-r from-purple-500 via-violet-500 to-blue-500 bg-clip-text text-transparent">
                 Mate
               </span>
             </h1>
+            </Link>
           </a>
         </div>
 
@@ -86,12 +89,29 @@ const Navbar = () => {
             {user ? (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-4  z-[1] w-56 rounded-box bg-base-300 p-2 shadow-lg"
+                className="menu dropdown-content mt-5  z-[1] w-40 rounded-box bg-base-300 p-2 shadow-lg"
               >
                 <li>
                   <Link to="/profile" className="justify-between">
                     Profile
-                    <span className="badge badge-primary">New</span>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to="/feed" className="justify-between">
+                    Feed
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to="/connection" className="justify-between">
+                    Connection
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to="/request" className="justify-between">
+                    Request
                   </Link>
                 </li>
 

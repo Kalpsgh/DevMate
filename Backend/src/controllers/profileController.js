@@ -14,21 +14,19 @@ export const getProfile = async (req, res) => {
 
 export const editProfile = async (req, res) => {
   try {
-    console.log("1. API Hit");
+    
 
     validateEditProfileData(req);
-    console.log("2. Validation Passed");
+    
 
     const loggedInUser = req.user;
-    console.log("3. User Found");
 
     Object.keys(req.body).forEach((key) => {
       loggedInUser[key] = req.body[key];
     });
-    console.log("4. User Updated");
-
+   
     await loggedInUser.save();
-    console.log("5. User Saved");
+  
 
     res.status(200).json(loggedInUser);
 

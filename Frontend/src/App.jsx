@@ -7,6 +7,8 @@ import Hero from "./pages/Hero";
 import Signup from "./pages/Signup";
 import ProtectedLayout from "./pages/ProtectedLayout";
 import EditProfile from "./pages/EditProfile";
+import Connection from "./pages/Connection";
+import Request from "./pages/Request";
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
           <Route path="/feed" element={<Feed />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/edit" element={<EditProfile />} />
+          <Route path="/connection" element={<Connection/>} /> 
+          <Route path="/request" element={<Request/>} />      
+
         </Route>
 
         {/* 404 */}

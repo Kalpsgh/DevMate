@@ -65,9 +65,6 @@ export const requestController = async (req, res) => {
 
         res.json(connectionRequest)
 
-        res.status(200).send("Connection Request Sent Successfully");
-
-
     } catch (err) {
 
         res.status(500).send(err.message);
