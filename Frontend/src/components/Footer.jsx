@@ -4,10 +4,10 @@ const Footer = () => {
   return (
     <>
 
-      <footer className="footer sm:footer-horizontal bg-base-200 text-base-content flex justify-center items-center p-4 bottom-0">
+      <footer className="footer sm:footer-horizontal bg-base-200 text-base-content flex justify-center items-center p-2 bottom-0">
         <aside className="grid-flow-col items-center">
           <svg
-            width="30"
+            width="20"
             height="30"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"

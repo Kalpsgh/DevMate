@@ -41,7 +41,7 @@ export const login = async (req, res) => {
     const user = await User.findOne({ emailId });
 
     if (!user) {
-      throw new Error("Invalid Credentials");
+       return res.status(400).send("Invalid Credentials");
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -50,7 +50,7 @@ export const login = async (req, res) => {
     );
 
     if (!isPasswordValid) {
-      throw new Error("Invalid Credentials");
+       return res.status(400).send("Invalid Credentials");;
     }
 
     const token = jwt.sign(

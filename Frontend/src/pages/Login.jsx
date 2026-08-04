@@ -9,13 +9,16 @@ const Login = () => {
 
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
+  const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
+      setError("");
       const res = await axios.post(
-        BASE_URL+"login",
+        BASE_URL + "login",
         {
           emailId,
           password,
@@ -26,15 +29,20 @@ const Login = () => {
       );
       dispatch(addUser(res.data));
       navigate("/feed");
-      
+
 
     } catch (error) {
-      console.log(error.message)
+
+       console.log(error);
+  console.log(error.response);
+  console.log(error.response?.data);
+
+      setError(error.response?.data || "Something went wrong");
 
     }
   }
 
-  
+
 
   //dispatch(addUser(res.data))
 
@@ -80,13 +88,19 @@ const Login = () => {
             onChange={(e) => { setPassword(e.target.value) }}
           />
 
+          {error && (
+            <p className="text-error text-sm mt-2">
+              {error}
+            </p>
+          )}
+
           <button className="btn btn-primary w-full mt-6" onClick={handleLogin}>
             Login
           </button>
 
           <p className="text-center mt-5 text-sm">
             Don't have an account?{" "}
-            <span className="text-primary font-semibold cursor-pointer hover:underline" onClick={()=>{navigate("/signup")}}>
+            <span className="text-primary font-semibold cursor-pointer hover:underline" onClick={() => { navigate("/signup") }}>
               Sign Up
             </span>
           </p>

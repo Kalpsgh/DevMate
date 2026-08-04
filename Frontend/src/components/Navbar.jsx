@@ -5,10 +5,38 @@ import { useNavigate } from 'react-router-dom';
 import Feed from '../pages/Feed';
 import { Link } from 'react-router-dom';
 
+import { useDispatch } from "react-redux";
+import { removeUser } from "../utils/userSlice";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+
 const Navbar = () => {
 
   const user = useSelector((store) => store.user);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        BASE_URL + "logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+
+      dispatch(removeUser());
+
+      navigate("/");
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
 
 
 
@@ -47,7 +75,7 @@ const Navbar = () => {
                   <img
                     src={user?.photoUrl}
                     alt="Profile"
-                    className="w-14 h-14 rounded-full object-center object-cover"
+                    className="w-14 h-14 rounded-full object-center object-cover "
                   />
 
                 </div>
@@ -58,7 +86,7 @@ const Navbar = () => {
             {user ? (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] w-56 rounded-box bg-base-100 p-2 shadow-lg"
+                className="menu menu-sm dropdown-content mt-4  z-[1] w-56 rounded-box bg-base-300 p-2 shadow-lg"
               >
                 <li>
                   <Link to="/profile" className="justify-between">
@@ -68,15 +96,9 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                  <a>Edit Profile</a>
-                </li>
-
-                <li>
-                  <a>Settings</a>
-                </li>
-
-                <li>
-                  <a>Logout</a>
+                  <button onClick={handleLogout}>
+                    Logout
+                  </button>
                 </li>
               </ul>
             ) : (

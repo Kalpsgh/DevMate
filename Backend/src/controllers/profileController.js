@@ -13,27 +13,30 @@ export const getProfile = async (req, res) => {
 };
 
 export const editProfile = async (req, res) => {
+  try {
+    console.log("1. API Hit");
 
-    try {
-        validateEditProfileData(req);
+    validateEditProfileData(req);
+    console.log("2. Validation Passed");
 
-        const loggedInUser = req.user;
-        console.log(loggedInUser)
+    const loggedInUser = req.user;
+    console.log("3. User Found");
 
-        Object.keys(req.body).forEach((key) => {
-            loggedInUser[key] = req.body[key];
-        });
+    Object.keys(req.body).forEach((key) => {
+      loggedInUser[key] = req.body[key];
+    });
+    console.log("4. User Updated");
 
-        console.log(loggedInUser)
+    await loggedInUser.save();
+    console.log("5. User Saved");
 
-        await loggedInUser.save();
+    res.status(200).json(loggedInUser);
 
-        res.send("Profile Updated Successfully");
-
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-}
+  } catch (err) {
+    console.log("ERROR:", err);
+      res.status(400).send(err.message);
+  }
+};
 
 export const passwordupdate = async (req, res) => {
 

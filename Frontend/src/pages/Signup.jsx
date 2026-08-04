@@ -51,7 +51,7 @@ const Signup = () => {
     return (
         <>
             <div className="flex items-center justify-center min-h-screen bg-base-100 py-10">
-                <fieldset className="fieldset w-full max-w-md rounded-2xl bg-base-300 p-8 shadow-xl border border-base-300">
+                <fieldset className="fieldset w-full max-w-3xl rounded-2xl bg-base-300 p-8 shadow-xl border border-base-300">
 
                     <h2 className="text-3xl font-bold text-center mb-2">
                         Create Account 🚀
@@ -61,125 +61,140 @@ const Signup = () => {
                         Join DevMate and connect with developers.
                     </p>
 
-                    {/* First Name */}
-                    <label className="label">
-                        <span className="label-text font-medium">First Name</span>
-                    </label>
+                    <div className="grid md:grid-cols-2 gap-5">
 
-                    <input
-                        type="text"
-                        value={firstName}
-                        placeholder="Enter your first name"
-                        className="input input-bordered w-full"
-                        onChange={(e) => setFirstName(e.target.value)}
-                    />
+  {/* First Name */}
+  <div>
+    <label className="label">
+      <span className="label-text font-medium">First Name</span>
+    </label>
 
-                    {/* Last Name */}
-                    <label className="label mt-4">
-                        <span className="label-text font-medium">Last Name</span>
-                    </label>
+    <input
+      type="text"
+      value={firstName}
+      placeholder="First Name"
+      className="input input-bordered w-full"
+      onChange={(e) => setFirstName(e.target.value)}
+    />
+  </div>
 
-                    <input
-                        type="text"
-                        value={lastName}
-                        placeholder="Enter your last name"
-                        className="input input-bordered w-full"
-                        onChange={(e) => setLastName(e.target.value)}
-                    />
+  {/* Last Name */}
+  <div>
+    <label className="label">
+      <span className="label-text font-medium">Last Name</span>
+    </label>
 
-                    {/* Email */}
-                    <label className="label mt-4">
-                        <span className="label-text font-medium">Email</span>
-                    </label>
+    <input
+      type="text"
+      value={lastName}
+      placeholder="Last Name"
+      className="input input-bordered w-full"
+      onChange={(e) => setLastName(e.target.value)}
+    />
+  </div>
 
-                    <input
-                        type="email"
-                        value={emailId}
-                        placeholder="Enter your email"
-                        className="input input-bordered w-full"
-                        onChange={(e) => setEmailId(e.target.value)}
-                    />
+  {/* Email */}
+  <div>
+    <label className="label">
+      <span className="label-text font-medium">Email</span>
+    </label>
 
-                    {/* Password */}
-                    <label className="label mt-4">
-                        <span className="label-text font-medium">Password</span>
-                    </label>
+    <input
+      type="email"
+      value={emailId}
+      placeholder="Email"
+      className="input input-bordered w-full"
+      onChange={(e) => setEmailId(e.target.value)}
+    />
+  </div>
 
-                    <input
-                        type="password"
-                        value={password}
-                        placeholder="Create a password"
-                        className="input input-bordered w-full"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+  {/* Password */}
+  <div>
+    <label className="label">
+      <span className="label-text font-medium">Password</span>
+    </label>
 
-                    {/* Age */}
-                    <label className="label mt-4">
-                        <span className="label-text font-medium">Age</span>
-                    </label>
+    <input
+      type="password"
+      value={password}
+      placeholder="Password"
+      className="input input-bordered w-full"
+      onChange={(e) => setPassword(e.target.value)}
+    />
+  </div>
 
-                    <input
-                        type="number"
-                        value={age}
-                        placeholder="Enter your age"
-                        className="input input-bordered w-full"
-                        onChange={(e) => setAge(e.target.value)}
-                    />
+  {/* Age */}
+  <div>
+    <label className="label">
+      <span className="label-text font-medium">Age</span>
+    </label>
 
-                    {/* Gender */}
-                    <label className="label mt-4">
-                        <span className="label-text font-medium">Gender</span>
-                    </label>
+    <input
+      type="number"
+      value={age}
+      placeholder="Age"
+      className="input input-bordered w-full"
+      onChange={(e) => setAge(e.target.value)}
+    />
+  </div>
 
-                    <select
-                        className="select select-bordered w-full"
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
-                    >
-                        <option value="">Select Gender</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
-                    </select>
+  {/* Gender */}
+  <div>
+    <label className="label">
+      <span className="label-text font-medium">Gender</span>
+    </label>
 
-                    {/* Photo URL */}
-                    <label className="label mt-4">
-                        <span className="label-text font-medium">Photo URL</span>
-                    </label>
+    <select
+      className="select select-bordered w-full"
+      value={gender}
+      onChange={(e) => setGender(e.target.value)}
+    >
+      <option value="">Select Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+  </div>
 
-                    <input
-                        type="text"
-                        value={photoUrl}
-                        placeholder="Paste your profile image URL"
-                        className="input input-bordered w-full"
-                        onChange={(e) => setPhotoUrl(e.target.value)}
-                    />
+</div>
+                   {/* Photo URL */}
+<label className="label mt-5">
+  <span className="label-text font-medium">Photo URL</span>
+</label>
 
-                    {/* About */}
-                    <label className="label mt-4">
-                        <span className="label-text font-medium">About</span>
-                    </label>
+<input
+  type="text"
+  value={photoUrl}
+  placeholder="Paste your profile image URL"
+  className="input input-bordered w-full"
+  onChange={(e) => setPhotoUrl(e.target.value)}
+/>
 
-                    <textarea
-                        value={about}
-                        placeholder="Tell us something about yourself..."
-                        className="textarea textarea-bordered w-full"
-                        rows="3"
-                        onChange={(e) => setAbout(e.target.value)}
-                    />
+{/* About */}
+<label className="label mt-5">
+  <span className="label-text font-medium">About</span>
+</label>
 
-                    {/* Skills */}
-                    <label className="label mt-4">
-                        <span className="label-text font-medium">Skills</span>
-                    </label>
+<textarea
+  value={about}
+  rows="3"
+  placeholder="Tell us something about yourself..."
+  className="textarea textarea-bordered w-full"
+  onChange={(e) => setAbout(e.target.value)}
+/>
 
-                    <input
-                        type="text"
-                        value={skills}
-                        placeholder="React, Node.js, MongoDB"
-                        className="input input-bordered w-full"
-                        onChange={(e) => setSkills(e.target.value)}
-                    />
+{/* Skills */}
+<label className="label mt-5">
+  <span className="label-text font-medium">Skills</span>
+</label>
+
+<input
+  type="text"
+  value={skills}
+  placeholder="React, Node.js, MongoDB"
+  className="input input-bordered w-full"
+  onChange={(e) => setSkills(e.target.value)}
+/>
 
                     <button
                         className="btn btn-primary w-full mt-6"

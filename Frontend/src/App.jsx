@@ -5,6 +5,8 @@ import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import Hero from "./pages/Hero";
 import Signup from "./pages/Signup";
+import ProtectedLayout from "./pages/ProtectedLayout";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -12,19 +14,20 @@ function App() {
 
       <Routes>
 
-        {/* Pages with Navbar */}
+        {/* Public Routes */}
         <Route path="/" element={<Home />}>
-           <Route index element={<Hero />} />
-          
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/feed" element={<Feed />} />
-          
+          <Route index element={<Hero />} />
         </Route>
 
-        {/* Pages without Navbar */}
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
-        <Route path="/signup" element={<Signup/>}/>
+        {/* Protected Routes */}
+        <Route element={<ProtectedLayout />}>
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
+        </Route>
 
         {/* 404 */}
         <Route path="*" element={<Error />} />

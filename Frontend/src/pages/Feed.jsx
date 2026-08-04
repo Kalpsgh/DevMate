@@ -1,38 +1,14 @@
-import React from 'react'
 import { useEffect } from "react";
 import axios from "axios";
-import { BASE_URL } from '../utils/constants.jsx';
-import { useDispatch } from "react-redux";
-import { addFeed } from "./feedSlice.jsx";
-import { useSelector } from "react-redux";
-
-import { useNavigate } from "react-router-dom";
-
-import { addUser } from "../utils/userSlice";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addFeed } from "../utils/feedSlice";
+import { BASE_URL } from "../utils/constants";
+import UserCard from "../components/UserCard";
 
 const Feed = () => {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const user = useSelector((store) => store.user);
   const feed = useSelector((store) => store.feed);
-
-  const fetchUser = async () => {
-    try {
-      const res = await axios.get(BASE_URL + "profile/view", {
-        withCredentials: true,
-      });
-
-      dispatch(addUser(res.data));
-      return true;
-
-    } catch (err) {
-      navigate("/login");
-      return false;
-    }
-  };
 
   const getFeed = async () => {
     try {
@@ -48,39 +24,19 @@ const Feed = () => {
   };
 
   useEffect(() => {
-
-    const loadData = async () => {
-
-      if (!user) {
-
-        const loggedIn = await fetchUser();
-
-        if (!loggedIn) return;
-
-      }
-
-      await getFeed();
-
-    };
-
-    loadData();
-
+    getFeed();
   }, []);
 
+  if (!feed || feed.length === 0) {
+    return (
+      <h1 className="text-center text-3xl mt-20">
+        No More Developers 🚀
+      </h1>
+    );
+  }
 
+  return <UserCard user={feed[0]} />;
 
-  console.log(feed);
+};
 
-
-  return (
-    <div className='h-screen'>
-
-
-      Feed
-
-
-    </div>
-  )
-}
-
-export default Feed
+export default Feed;  
