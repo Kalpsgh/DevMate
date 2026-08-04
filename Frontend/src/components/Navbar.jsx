@@ -65,26 +65,36 @@ const Navbar = () => {
         </div>
 
         {/* Right Side */}
-        <div className="flex-none">
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              {user &&
-                <div className="w-15 h-10.5 rounded-full overflow-hidden border-2 border-primary shadow-md">
+        {/* Right Side */}
+<div className="flex-none flex items-center gap-4">
 
-                  <img
-                    src={user?.photoUrl}
-                    alt="Profile"
-                    className="w-14 h-14 rounded-full object-center object-cover "
-                  />
+  {user && (
+    <h2 className="hidden md:block text-lg font-mono">
+      Welcome,&nbsp;
+      <span className="text-lg font-mono">
+        {user.firstName}
+      </span>
+    </h2>
+  )}
 
-                </div>
+  <div className="dropdown dropdown-end">
+    <div
+      tabIndex={0}
+      role="button"
+      className="btn btn-ghost btn-circle avatar"
+    >
+      {user && (
+        <div className="w-15 h-10.5 rounded-full overflow-hidden border-2 border-primary shadow-md">
 
-              }
-            </div>
+          <img
+            src={user.photoUrl}
+            alt="Profile"
+            className="w-14 h-14 rounded-full object-cover object-center"
+          />
+
+        </div>
+      )}
+    </div>
 
             {user ? (
               <ul

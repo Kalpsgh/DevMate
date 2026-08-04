@@ -1,27 +1,50 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addFeed } from "../utils/feedSlice";
 import { BASE_URL } from "../utils/constants";
 import UserCard from "./UserCard";
+import { addFeed, removeFeed } from "../utils/feedSlice";
 
 const Feed = () => {
 
   const dispatch = useDispatch();
   const feed = useSelector((store) => store.feed);
 
-  const getFeed = async () => {
-    try {
-      const res = await axios.get(BASE_URL + "user/feed", {
+const feedUser = feed?.[0];
+
+const sendRequest = async (status, userId) => {
+  try {
+    await axios.post(
+      BASE_URL + "request/send/" + status + "/" + userId,
+      {},
+      {
         withCredentials: true,
-      });
+      }
+    );
 
-      dispatch(addFeed(res.data));
+    dispatch(removeFeed(userId));
 
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getFeed = async () => {
+  try {
+
+    const res = await axios.get(
+      BASE_URL + "user/feed",
+      {
+        withCredentials: true,
+      }
+    );
+
+    dispatch(addFeed(res.data));
+
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   useEffect(() => {
     getFeed();
@@ -35,8 +58,16 @@ const Feed = () => {
     );
   }
 
-  return <UserCard user={feed[0]} />;
+  return (
+   
+  <div className="flex justify-center items-center mt-6">
+    <UserCard
+      user={feedUser}
+      sendRequest={sendRequest}
+    />
+  </div>
 
+);
 };
 
 export default Feed;  

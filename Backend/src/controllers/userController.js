@@ -95,6 +95,7 @@ export const userFeed = async (req, res) => {
       .limit(limit);
 
     res.send(users);
+    
 
   } catch (err) {
     res.status(500).send(err.message);

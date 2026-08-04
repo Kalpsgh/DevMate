@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaTimes, FaHeart } from "react-icons/fa";
 
-const UserCard = ({ user }) => {
+const UserCard = ( { user, sendRequest }) => {
     return (
         <div className="flex justify-center items-center py-3 mt-3">
 
@@ -50,11 +50,19 @@ const UserCard = ({ user }) => {
 
                     <div className="card-actions justify-center w-full my-4 gap-3 m">
 
-                        <button   className="btn btn-primary rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                        <button className="btn btn-primary rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                            onClick={() =>
+                                sendRequest("interested", user._id)
+                            }
+                        >
                             Interested <FaHeart />
                         </button>
 
-                        <button  className="btn btn-error rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                        <button className="btn btn-error rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                            onClick={() =>
+                                sendRequest("ignored", user._id)
+                            }
+                        >
                             Ignore <FaTimes />
                         </button>
 

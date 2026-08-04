@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
-import {addPendingRequest} from "../utils/pendingRequest";
+import {addPendingRequest,removePendingRequest} from "../utils/pendingRequest";
 
 
 const Request = () => {
@@ -34,6 +34,28 @@ const Request = () => {
     pendingRequest();
 
   }, []);
+
+  const reviewRequest = async (status, requestId) => {
+  try {
+
+    const res = await axios.post(
+      BASE_URL + "request/review/" + status + "/" + requestId,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+
+     dispatch(removePendingRequest(requestId));
+
+    console.log(res.data);
+
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
 
  
 
@@ -116,11 +138,15 @@ const Request = () => {
 
 
                             <div className="flex flex-row gap-4 w-60 items-center">
-                            <button className="btn btn-success text-xl rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                            <button className="btn btn-success text-xl rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                            onClick={() => reviewRequest("accepted", request._id)}
+                            >
                                 Accept
                             </button>
 
-                            <button className="btn btn-success text-xl rounded-full ml-3 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                            <button className="btn btn-success text-xl rounded-full ml-3 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                             onClick={() => reviewRequest("rejected", request._id)}
+                            >
                                 Reject
                             </button>
                             </div>
