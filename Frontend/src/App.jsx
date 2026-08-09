@@ -9,6 +9,7 @@ import ProtectedLayout from "./pages/ProtectedLayout";
 import EditProfile from "./pages/EditProfile";
 import Connection from "./pages/Connection";
 import Request from "./pages/Request";
+import Chat from "./pages/Chat";
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/edit" element={<EditProfile />} />
           <Route path="/connection" element={<Connection/>} /> 
-          <Route path="/request" element={<Request/>} />      
+          <Route path="/request" element={<Request/>} />  
+          <Route path="/chat/:targetUserId" element={<Chat />} /> 
 
         </Route>
 
