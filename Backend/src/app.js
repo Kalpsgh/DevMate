@@ -229,20 +229,16 @@ io.on("connection", (socket) => {
 });
 
 
+const PORT = process.env.PORT || 5000;
+
+server.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server is running on port ${PORT}...`);
+});
+
 connectDb()
-  .then(() => {
-
-    console.log("MongoDB Connected");
-
-    const PORT = process.env.PORT || 5000;
-
-    server.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}...`);
+    .then(() => {
+        console.log("MongoDB Connected");
+    })
+    .catch((err) => {
+        console.log("MongoDB Can't Connect", err);
     });
-
-  })
-  .catch((err) => {
-
-    console.log("MongoDB Can't Connect", err);
-
-  });
