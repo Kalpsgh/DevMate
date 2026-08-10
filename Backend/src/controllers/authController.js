@@ -12,7 +12,7 @@ export const signup = async (req, res) => {
     // Validate
     validateSignUpData(req);
 
-    const { firstName, lastName, emailId, password,age, gender, photoUrl,about, skills, } = req.body;
+    const { firstName, lastName, emailId, password, age, gender, photoUrl, about, skills, } = req.body;
 
     // Hash password
     const hashPassword = await bcrypt.hash(password, 10);
@@ -41,7 +41,7 @@ export const login = async (req, res) => {
     const user = await User.findOne({ emailId });
 
     if (!user) {
-       return res.status(400).send("Invalid Credentials");
+      return res.status(400).send("Invalid Credentials");
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -50,7 +50,7 @@ export const login = async (req, res) => {
     );
 
     if (!isPasswordValid) {
-       return res.status(400).send("Invalid Credentials");;
+      return res.status(400).send("Invalid Credentials");;
     }
 
     const token = jwt.sign(
@@ -58,7 +58,11 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
 
     res.send(user);
 
