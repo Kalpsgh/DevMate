@@ -17,9 +17,9 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://devmate-frontend-x028.onrender.com",
     credentials: true,
-  })
+})
 );
 
 app.use(express.json());
@@ -38,10 +38,10 @@ const server = http.createServer(app);
 
 // Create Socket.IO server
 const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:5173",
-    credentials: true,
-  },
+    cors: {
+        origin: "https://devmate-frontend-x028.onrender.com",
+        credentials: true,
+    },
 });
 
 const onlineUsers = new Map();
