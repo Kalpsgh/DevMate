@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import connectDb from "./config/database.js";
 import cookieParser from "cookie-parser";
@@ -10,6 +11,7 @@ import http from "http";
 import { Server } from "socket.io";
 import chatRouter from "./routes/chat.js";
 import Chat from "./models/chat.js";
+
 
 const app = express();
 

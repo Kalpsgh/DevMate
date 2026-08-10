@@ -12,7 +12,7 @@ const userAuth = async (req, res, next) => {
             return res.status(401).send("Invalid Credentials");
         }
 
-        const decoded = jwt.verify(token, "MySecretKey");
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         const user = await UserModel.findById(decoded._id);
 
